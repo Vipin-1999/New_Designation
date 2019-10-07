@@ -3,8 +3,7 @@
 using namespace std;
 int i = 0;
 
-/*
-void Designation :: VectorInit()      {
+/*void Designation :: VectorInit()      {
     std::string temp;
     int number;
     ifstream in;
@@ -22,8 +21,7 @@ void Designation :: writetofile(std::string designation)       {
 	out.open("designation.txt", ios::app);
     out << endl << designation;
     out.close();
-}
-*/ 
+}*/
 
 bool Designation :: Validate(string designation)     {
     bool flag= std::regex_match(designation , std::regex("[A-Z]{1}[a-z]+"));
@@ -39,29 +37,29 @@ bool Designation :: Validate(string designation)     {
 }        
 
 std::string Designation :: Random(int length, int number, int Min_Length, bool x)        {
-    if((length<Min_Length)||(Min_Length*number>=length))
+    if((length < Min_Length) || (Min_Length*number >= length))
         throw std::invalid_argument("Invalid lengths");
     std::string Full_Designation;
-    srand(time(0)+(i++));
+    srand(time(0) + (i++));
     int gen;
-    gen=rand()%(length/number)+Min_Length;
-    if(gen>length)
-        gen=length;
+    gen = rand() % (length/number) + Min_Length;
+    if(gen > length)
+        gen = length;
     if(x==1)        { 
-        for(int k=0;k<number;k++)       {
+        for(int k = 0; k < number; k++)       {
             Full_Designation+=Generate(gen)+" ";
             if(Full_Designation.length()+gen>=length)
                 break;
         }
     }
     else        {
-        for(int k=0;k<number;k++)       {
+        for(int k = 0;k < number; k++)       {
             Full_Designation+=Generate_Invalid(gen)+" ";
             if(Full_Designation.length()>length)
                 break;
         }
     }
-    Full_Designation[Full_Designation.length()-1]='\0'; 
+    Full_Designation[Full_Designation.length()-1] = '\0'; 
     return Full_Designation;
 }
 
@@ -70,7 +68,7 @@ std::string Designation :: Generate(size_t length)        {
         const char charset[] =
         "abcdefghijklmnopqrstuvwxyz";
         const size_t max_index = (sizeof(charset) - 1);            
-        return charset[rand() % max_index ];
+        return charset[rand() % max_index];
     };
     std::string str(length,0);
     srand(time(0)+i++);
@@ -84,18 +82,18 @@ std::string Designation :: Generate_Invalid(size_t length)        {
         const char charset[] =
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-=+_!@#$%^&*(),.<>/?][{}/|`~";
         const size_t max_index = (sizeof(charset) - 1);            
-        return charset[ rand() % max_index ];
+        return charset[rand() % max_index];
     };
     std::string str(length,0);
-    srand(time(0)+i++);
-    std::generate_n( str.begin(), length, randchar );
+    srand(time(0) + i++);
+    std::generate_n(str.begin(), length,randchar );
     if(Validate(str))
         Generate_Invalid(length);
     return str;
 }
 
 void Designation :: Add(string designation)       {
-    bool flag=1;
+/*    bool flag=1;
     string temp;
     ifstream in;
 	in.open("designation.txt", ios::binary);
@@ -106,28 +104,27 @@ void Designation :: Add(string designation)       {
         }
     }
     in.close();
-/*
-    if(flag == 1)       {
+    if(flag == 1)       { */
         desList.push_back(designation);
-        writetofile(designation);
-    } */
+//        writetofile(designation);
+//    }
 }
 
 void Designation :: Remove(std::string designation)       {
     bool flag=1;
-    for(auto j = desList.begin();j!=desList.end();++j)
+    for(auto j = desList.begin(); j != desList.end(); ++j)
         if(*j == designation)   {
             flag=0;
             desList.erase(j);
             break;
         }
     if(flag==1)
-        cout<<"Designation doesnt exist"<<endl;
-/*    for(auto j= desList.begin(); j != desList.end(); ++j)
-        writetofile(*j); */
+        cout << "Designation doesnt exist" << endl;
+//    for(auto j = desList.begin(); j != desList.end(); ++j)
+//        writetofile(*j);
 }
 
 void Designation :: Show()        {
-    for(auto j=0;j<desList.size();j++)
+    for(auto j = 0; j < desList.size(); ++j)
         cout << desList.at(j) << endl;
 }

@@ -1,22 +1,21 @@
 #ifndef DESIGNATION_H
 #define DESIGNATION_H
 #include<iostream>
-#include<ctime>
 #include<fstream>
 #include<string>
 #include<stdexcept>
 #include<vector>
 #include<regex>
 
+//#include "nbind/nbind.h"
+
 typedef unsigned long size_t;
 typedef std::vector<std::string> svector;
 
-// #include "nbind/nbind.h"
-
 class Designation       {
     public:
-//        void VectorInit();
-//        void writetofile(std::string);
+        void VectorInit();
+        void writetofile(std::string);
         bool Validate(std::string);
         std::string Random(int,int,int,bool);
         std::string Generate(size_t);
@@ -28,3 +27,5 @@ class Designation       {
 };
 
 #endif
+
+
